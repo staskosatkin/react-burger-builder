@@ -1,13 +1,14 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
 import classes from './Burger.module.css';
 import BurgerIngredient from './BurgerIngredient/BurgerIngredient';
 
 const burder = (props) => {
-
     let transformedIngrediens = Object.keys(props.ingredients)
         .map(igKey => {
-            return [...Array(props.ingredients[igKey])].map((_, index) => {
+            const count = parseInt(props.ingredients[igKey], 10) || 0;
+            return [...Array(count)].map((_, index) => {
                     return <BurgerIngredient key={igKey + index} type={igKey} />
                 });
         })
@@ -28,4 +29,4 @@ const burder = (props) => {
     );
 };
 
-export default burder;
+export default withRouter(burder);
